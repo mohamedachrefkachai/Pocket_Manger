@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#E3F2FD">
 
     <!-- Titre -->
     <TextView
@@ -15,7 +15,7 @@
         android:text="Pocket Manager"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#2E7D32"
+        android:textColor="#0D47A1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/card"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +38,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+            <!-- Image en haut -->
 
             <!-- Username -->
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Logo"
+                android:src="@drawable/pocket_image" />
+
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
@@ -75,22 +85,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#2E7D32"
+                android:backgroundTint="#1976D2"
                 android:text="LOGIN"
                 android:textColor="@android:color/white" />
+
             <!-- Inscription Button -->
             <Button
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="#64B5F6"
                 android:text="S'INSCRIRE"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
