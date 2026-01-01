@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="bottom"
     android:padding="16dp"
-    android:background="#4CAF50">
+    android:background="#1976D2">
 
     <TextView
         android:id="@+id/nav_header_name"

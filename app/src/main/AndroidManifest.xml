@@ -13,7 +13,7 @@
         android:theme="@style/Theme.RecyclerSleam">
         <activity
             android:name=".controller.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +28,19 @@
         </activity>
 
 
-        <activity android:name=".controller.Register" android:exported="true"/>
-        <activity android:name=".controller.MainActivity" android:exported="true"/>
+        <activity
+            android:name=".controller.Register"
+            android:exported="true" />
+        <activity
+            android:name=".controller.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".controller.Admin"
+            android:exported="true" />
+        <activity
+            android:name=".controller.UserListActivity"
+            android:exported="true" />
+
 
     </application>
 

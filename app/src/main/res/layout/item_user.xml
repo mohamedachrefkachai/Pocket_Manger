@@ -1,0 +1,29 @@
+<!-- res/layout/item_user.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/userNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/userRole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Role"
+        android:textSize="14sp"/>
+</LinearLayout>
