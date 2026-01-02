@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@android:drawable/ic_menu_myplaces"
-                android:hint="Nom d'utilisateur"
+                android:hint="Email d'utilisateur"
                 android:inputType="textPersonName"
                 android:padding="12dp" />
 

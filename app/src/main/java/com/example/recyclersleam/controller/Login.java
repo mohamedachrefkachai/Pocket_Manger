@@ -81,8 +81,13 @@ public class Login extends AppCompatActivity {
                     if ("ADMIN".equalsIgnoreCase(user.getRole())) {
                         startActivity(new Intent(this, Admin.class));
                     } else {
-                        startActivity(new Intent(this, MainActivity.class));
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        intent.putExtra("name", user.getNom());
+                        intent.putExtra("email", user.getEmail());
+                        startActivity(intent);
                     }
+                    finish();
+
 
                     finish();
                 } else {

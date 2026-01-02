@@ -2,70 +2,78 @@ package com.example.recyclersleam.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.example.recyclersleam.R;
-import com.google.android.material.navigation.NavigationView;
-
-
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private Toolbar toolbar;
+    private BottomNavigationView bottomNavigationView;
+
+    // Infos utilisateur
+    private String userName;
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Récupérer les extras envoyés depuis Login
+        userName = getIntent().getStringExtra("name");
+        userEmail = getIntent().getStringExtra("email");
+
+        // Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        // Bottom navigation
+        bottomNavigationView = findViewById(R.id.bottom_nav);
 
-        // Toggle pour ouvrir/fermer Drawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        // Fragment par défaut
+        loadFragment(new HomeFragment());
+        toolbar.setTitle("Accueil");
 
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment fragment = null;
 
-            if (id == R.id.nav_budget) {
-                startActivity(new Intent(this, Login.class));
-            } else if (id == R.id.nav_history) {
-                startActivity(new Intent(this, Login.class));
-            } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(this, Login.class));
-            } else if (id == R.id.nav_logout) {
-                finish();
+            if (item.getItemId() == R.id.nav_home) {
+                fragment = new HomeFragment();
+                toolbar.setTitle("Accueil");
+
+            } else if (item.getItemId() == R.id.nav_profile) {
+                ProfileFragment profileFragment = new ProfileFragment();
+                profileFragment.setUserData(userName, userEmail); // PASSER LES INFOS
+                fragment = profileFragment;
+                toolbar.setTitle("Profil");
+
+            } else if (item.getItemId() == R.id.nav_logout) {
+                // 🔹 Déconnexion
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                return true; // on retourne true pour dire que l'action est gérée
             }
 
-            drawerLayout.closeDrawers();
-            return true;
+            if (fragment != null) {
+                loadFragment(fragment);
+                return true;
+            }
+
+            return false;
         });
 
-        // Clic sur les cartes
-        CardView budgetCard = findViewById(R.id.budgetCard);
-        CardView historyCard = findViewById(R.id.historyCard);
+    }
 
-        budgetCard.setOnClickListener(v ->
-                startActivity(new Intent(this, Login.class)));
-
-        historyCard.setOnClickListener(v ->
-                startActivity(new Intent(this, Login.class)));
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }

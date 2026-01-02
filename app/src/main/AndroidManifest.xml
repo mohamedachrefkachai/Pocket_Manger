@@ -41,7 +41,9 @@
             android:name=".controller.UserListActivity"
             android:exported="true" />
 
-
+        <activity
+            android:name=".controller"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_profile_gradient"
+    android:padding="16dp">
+
+    <!-- Carte Material contenant avatar et infos -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Avatar rond avec ombre -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_person"
+                android:contentDescription="Avatar"
+                app:shapeAppearanceOverlay="@style/CircularImage"
+                android:elevation="8dp"/>
+
+            <!-- Nom -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nom Utilisateur"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#212121"/>
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="email@email.com"
+                android:textSize="16sp"
+                android:textColor="#616161"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Boutons Modifier / Supprimer / Déconnexion -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/cardProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Modifier Profil -->
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="200dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#1976D2"
+            android:text="Modifier Profil"
+            android:textColor="@android:color/white"
+            android:elevation="6dp"/>
+
+        <!-- Supprimer Profil -->
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="200dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#E53935"
+            android:text="Supprimer Profil"
+            android:textColor="@android:color/white"
+            android:elevation="6dp"/>
+
+        <!-- Déconnexion -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="200dp"
+            android:layout_height="56dp"
+            android:backgroundTint="#D32F2F"
+            android:text="Se Déconnecter"
+            android:textColor="@android:color/white"
+            android:elevation="6dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
