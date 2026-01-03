@@ -3,6 +3,7 @@ package com.example.recyclersleam.Dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.recyclersleam.Entity.User;
 
@@ -28,4 +29,10 @@ public interface UserDao {
     // ❌ Supprimer tous les users (tests)
     @Query("DELETE FROM users")
     void deleteAll();
+
+    @Update
+    void update(User user);
+
+    @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
+    User findById(int id);
 }

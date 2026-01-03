@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     // Infos utilisateur
     private String userName;
     private String userEmail;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // Récupérer les extras envoyés depuis Login
         userName = getIntent().getStringExtra("name");
         userEmail = getIntent().getStringExtra("email");
-
+        userId = getIntent().getIntExtra("userId", -1);
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
             } else if (item.getItemId() == R.id.nav_profile) {
                 ProfileFragment profileFragment = new ProfileFragment();
-                profileFragment.setUserData(userName, userEmail); // PASSER LES INFOS
+                profileFragment.setUserData(userId,userName, userEmail);
+
                 fragment = profileFragment;
                 toolbar.setTitle("Profil");
 

@@ -16,14 +16,16 @@ public class ProfileFragment extends Fragment {
 
     private TextView tvName, tvEmail;
     private ImageView imgProfile;
-    private Button btnLogout;
+    private Button btnLogout, btnUpdate, btnDelete;
 
+    private int userId;
     private String name = "Nom Utilisateur";
     private String email = "email@email.com";
 
     public ProfileFragment() {}
 
-    public void setUserData(String name, String email) {
+    public void setUserData(int userId, String name, String email) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
     }
@@ -31,20 +33,40 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        // 🔹 VIEWS
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
         imgProfile = view.findViewById(R.id.imgProfile);
-        btnLogout = view.findViewById(R.id.btnLogout);
 
+        btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnDelete = view.findViewById(R.id.btnDelete);
+        btnLogout = view.findViewById(R.id.btnLogout); // ✅ MANQUAIT ICI
+
+        // 🔹 DATA
         tvName.setText(name);
         tvEmail.setText(email);
 
+        // 🔹 LOGOUT
         btnLogout.setOnClickListener(v -> {
-            // Retourner au login
-            if(getActivity() != null){
+            if (getActivity() != null) {
                 getActivity().finish();
+            }
+        });
+
+        // 🔹 EDIT PROFILE
+        btnUpdate.setOnClickListener(v -> {
+            EditProfileFragment editFragment = new EditProfileFragment();
+            editFragment.setUserId(userId);
+
+            if (getActivity() != null) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, editFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
