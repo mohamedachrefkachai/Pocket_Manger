@@ -90,6 +90,14 @@
                 android:inputType="textPassword"
                 android:layout_marginTop="16dp"
                 android:padding="12dp" />
+            <Switch
+
+                android:id="@+id/switch_biometric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activer l'empreinte"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
 
             <!-- S'inscrire Button -->
             <Button

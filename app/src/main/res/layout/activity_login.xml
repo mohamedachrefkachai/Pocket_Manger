@@ -88,6 +88,12 @@
                 android:backgroundTint="#1976D2"
                 android:text="LOGIN"
                 android:textColor="@android:color/white" />
+            <Button
+                android:id="@+id/btnFingerprint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Connexion par empreinte"
+                android:layout_marginTop="16dp"/>
 
             <!-- Inscription Button -->
             <Button
