@@ -1,5 +1,6 @@
 package com.example.recyclersleam.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,9 +15,10 @@ import com.example.recyclersleam.Util.MyDataBase;
 
 public class Register extends AppCompatActivity {
 
-    EditText username, email, password, confirmPassword;
+    EditText username, email, password, confirmPassword, etBirthDate;
     Button registerBtn, backLoginBtn;
     Switch biometricSwitch;
+    android.widget.RadioGroup radioGroupGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,23 @@ public class Register extends AppCompatActivity {
         confirmPassword = findViewById(R.id.confirm_password);
 
         biometricSwitch = findViewById(R.id.switch_biometric);
+        radioGroupGender = findViewById(R.id.radioGroupGender);
+        etBirthDate = findViewById(R.id.etBirthDate);
+        etBirthDate.setFocusable(false);
+        etBirthDate.setClickable(true);
+        etBirthDate.setOnClickListener(v -> {
+            java.util.Calendar c = java.util.Calendar.getInstance();
+            int year = c.get(java.util.Calendar.YEAR);
+            int month = c.get(java.util.Calendar.MONTH);
+            int day = c.get(java.util.Calendar.DAY_OF_MONTH);
+
+            new android.app.DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
+                // Format: YYYY-MM-DD
+                String date = String.format(java.util.Locale.getDefault(), "%04d-%02d-%02d", year1, month1 + 1,
+                        dayOfMonth);
+                etBirthDate.setText(date);
+            }, year, month, day).show();
+        });
 
         registerBtn = findViewById(R.id.register_btn);
         backLoginBtn = findViewById(R.id.back_login_btn);
@@ -62,16 +81,28 @@ public class Register extends AppCompatActivity {
                     .findByEmail(mail);
 
             if (existing != null) {
-                runOnUiThread(() ->
-                        Toast.makeText(this, "Email déjà utilisé", Toast.LENGTH_SHORT).show()
-                );
+                runOnUiThread(() -> Toast.makeText(this, "Email déjà utilisé", Toast.LENGTH_SHORT).show());
                 return;
             }
 
             User user = new User(nom, mail, pwd, "USER");
+            user.setBiometricEnabled(biometricEnabled);
+
+            // Gender
+            int selectedGenderId = radioGroupGender.getCheckedRadioButtonId();
+            if (selectedGenderId == R.id.radioMale) {
+                user.setGender("Homme");
+            } else if (selectedGenderId == R.id.radioFemale) {
+                user.setGender("Femme");
+            } else {
+                user.setGender("Non précisé");
+            }
+
+            // Date
+            user.setBirthDate(etBirthDate.getText().toString().trim());
             user.setBiometricEnabled(biometricEnabled); // 🔐 ASSOCIATION EMAIL ↔ BIOMETRIC
 
-            MyDataBase.getAppDataBase(this)
+            long newUserId = MyDataBase.getAppDataBase(this)
                     .UserDao()
                     .insert(user);
 
@@ -81,6 +112,10 @@ public class Register extends AppCompatActivity {
                                 ? "Compte créé avec empreinte activée"
                                 : "Compte créé sans empreinte",
                         Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Register.this, AddBalanceActivity.class);
+                intent.putExtra("USER_ID", (int) newUserId);
+                startActivity(intent);
                 finish();
             });
 

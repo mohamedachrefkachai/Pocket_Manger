@@ -1,39 +1,37 @@
 package com.example.recyclersleam.controller;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.recyclersleam.Entity.User;
 import com.example.recyclersleam.R;
 import com.example.recyclersleam.Util.MyDataBase;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class EditProfileFragment extends Fragment {
 
-    private TextInputEditText etName, etEmail, etPassword;
-    private Button btnSave;
+    private View cardUpdate, cardDelete;
+    private int userId;
 
-    // Données utilisateur à passer depuis ProfileFragment
-    private int userId; // <-- utiliser ID pour update
-    private User currentUser;
-
-    // Ajouter cette méthode pour recevoir l'ID
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_edit_profile, container, false);
     }
 
@@ -41,52 +39,51 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        etName = view.findViewById(R.id.etName);
-        etEmail = view.findViewById(R.id.etEmail);
-        etPassword = view.findViewById(R.id.etPassword);
-        btnSave = view.findViewById(R.id.btnSaveProfile);
+        // Card clicks
+        cardUpdate = view.findViewById(R.id.cardUpdate);
+        cardDelete = view.findViewById(R.id.cardDelete);
 
-        // Charger les infos actuelles de l'utilisateur par ID
-        new Thread(() -> {
-            MyDataBase db = MyDataBase.getAppDataBase(getContext());
-            currentUser = db.UserDao().findById(userId); // <-- utiliser l'ID
-            if (currentUser != null) {
-                getActivity().runOnUiThread(() -> {
-                    etName.setText(currentUser.getNom());
-                    etEmail.setText(currentUser.getEmail());
-                    etPassword.setText(currentUser.getPassword());
-                });
-            }
-        }).start();
+        // Click Update -> Open Form
+        cardUpdate.setOnClickListener(v -> {
+            UpdateProfileFormFragment formFragment = new UpdateProfileFormFragment();
+            formFragment.setUserId(userId);
 
-        btnSave.setOnClickListener(v -> saveProfile());
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, formFragment) // Assuming parent container ID
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        // Click Delete -> Show Dialog
+        cardDelete.setOnClickListener(v -> showDeleteConfirmation());
     }
 
-    private void saveProfile() {
-        String name = etName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+    private void showDeleteConfirmation() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Supprimer le compte ?")
+                .setMessage("Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.")
+                .setPositiveButton("Supprimer", (dialog, which) -> deleteAccount())
+                .setNegativeButton("Annuler", null)
+                .show();
+    }
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getContext(), "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
+    private void deleteAccount() {
         new Thread(() -> {
-            if (currentUser != null) {
-                MyDataBase db = MyDataBase.getAppDataBase(getContext());
-                currentUser.setNom(name);
-                currentUser.setEmail(email);
-                currentUser.setPassword(password);
-                db.UserDao().update(currentUser);
+            MyDataBase db = MyDataBase.getAppDataBase(getContext());
+            User u = db.UserDao().findById(userId);
+            if (u != null) {
+                db.UserDao().delete(u);
 
-                getActivity().runOnUiThread(() ->
-                        Toast.makeText(getContext(), "Profil mis à jour avec succès", Toast.LENGTH_SHORT).show()
-                );
-                getActivity().getSupportFragmentManager().popBackStack();
+                // Clear prefs
+                SharedPreferences prefs = getActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+                prefs.edit().clear().apply();
 
+                getActivity().runOnUiThread(() -> {
+                    Toast.makeText(getContext(), "Compte supprimé", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getActivity(), Login.class));
+                    getActivity().finish();
+                });
             }
         }).start();
     }
 }
-

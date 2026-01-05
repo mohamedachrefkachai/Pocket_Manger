@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +25,9 @@ import java.util.concurrent.Executor;
 public class Login extends AppCompatActivity {
 
     EditText email, password;
-    Button loginBtn, registerBtn, fingerprintBtn;
+    Button loginBtn;
+    TextView registerBtn, forgotPassword;
+    ImageButton fingerprintBtn;
 
     Executor executor;
     BiometricPrompt biometricPrompt;
@@ -48,12 +51,13 @@ public class Login extends AppCompatActivity {
         loginBtn = findViewById(R.id.login);
         registerBtn = findViewById(R.id.register);
         fingerprintBtn = findViewById(R.id.btnFingerprint);
+        forgotPassword = findViewById(R.id.forgotPassword);
+
+        forgotPassword.setOnClickListener(v -> startActivity(new Intent(Login.this, ForgotPasswordActivity.class)));
 
         loginBtn.setOnClickListener(v -> loginWithPassword());
 
-        registerBtn.setOnClickListener(v ->
-                startActivity(new Intent(Login.this, Register.class))
-        );
+        registerBtn.setOnClickListener(v -> startActivity(new Intent(Login.this, Register.class)));
 
         setupFingerprint();
     }
@@ -164,7 +168,8 @@ public class Login extends AppCompatActivity {
                             saveUserForBiometric(user);
                             biometricPrompt.authenticate(promptInfo);
                         } else {
-                            Toast.makeText(Login.this, "Empreinte non activée pour cet email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Empreinte non activée pour cet email", Toast.LENGTH_SHORT)
+                                    .show();
                         }
                     });
                 }).start();

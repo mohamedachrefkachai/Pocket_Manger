@@ -37,19 +37,23 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
         // Fragment par défaut
-        loadFragment(new HomeFragment());
+        HomeFragment homeFragment = new HomeFragment();
+        homeFragment.setUserId(userId);
+        loadFragment(homeFragment);
         toolbar.setTitle("Accueil");
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
 
             if (item.getItemId() == R.id.nav_home) {
-                fragment = new HomeFragment();
+                HomeFragment hFragment = new HomeFragment();
+                hFragment.setUserId(userId);
+                fragment = hFragment;
                 toolbar.setTitle("Accueil");
 
             } else if (item.getItemId() == R.id.nav_profile) {
                 ProfileFragment profileFragment = new ProfileFragment();
-                profileFragment.setUserData(userId,userName, userEmail);
+                profileFragment.setUserData(userId, userName, userEmail);
 
                 fragment = profileFragment;
                 toolbar.setTitle("Profil");

@@ -33,8 +33,7 @@ public class Admin extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
-        );
+                R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -63,7 +62,6 @@ public class Admin extends AppCompatActivity {
 
         // 🔹 Carte Voir Utilisateurs
         CardView usersCard = findViewById(R.id.usersCard_admin);
-        usersCard.setOnClickListener(v ->
-                startActivity(new Intent(Admin.this, UserListActivity.class)));
+        usersCard.setOnClickListener(v -> startActivity(new Intent(Admin.this, UserListActivity.class)));
     }
 }

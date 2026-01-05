@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,13 +15,13 @@ public class ProfileFragment extends Fragment {
 
     private TextView tvName, tvEmail;
     private ImageView imgProfile;
-    private Button btnLogout, btnUpdate, btnDelete;
 
     private int userId;
     private String name = "Nom Utilisateur";
     private String email = "email@email.com";
 
-    public ProfileFragment() {}
+    public ProfileFragment() {
+    }
 
     public void setUserData(int userId, String name, String email) {
         this.userId = userId;
@@ -31,44 +30,53 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // 🔹 VIEWS
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
+        TextView tvBalance = view.findViewById(R.id.tvBalance);
         imgProfile = view.findViewById(R.id.imgProfile);
 
-        btnUpdate = view.findViewById(R.id.btnUpdate);
-        btnDelete = view.findViewById(R.id.btnDelete);
-        btnLogout = view.findViewById(R.id.btnLogout); // ✅ MANQUAIT ICI
+        View cardManageProfile = view.findViewById(R.id.cardManageProfile);
 
         // 🔹 DATA
         tvName.setText(name);
         tvEmail.setText(email);
 
-        // 🔹 LOGOUT
-        btnLogout.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                getActivity().finish();
+        // Fetch balance from DB to be sure
+        new Thread(() -> {
+            com.example.recyclersleam.Entity.User user = com.example.recyclersleam.Util.MyDataBase
+                    .getAppDataBase(getContext()).UserDao().findById(userId);
+            if (user != null) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> tvBalance.setText("Solde: " + user.getSolde() + " TND"));
+                }
             }
-        });
+        }).start();
 
-        // 🔹 EDIT PROFILE
-        btnUpdate.setOnClickListener(v -> {
+        // 🔹 MANAGE PROFILE (Navigation to Hub)
+        cardManageProfile.setOnClickListener(v -> {
             EditProfileFragment editFragment = new EditProfileFragment();
             editFragment.setUserId(userId);
 
             if (getActivity() != null) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, editFragment)
-                        .addToBackStack(null)
-                        .commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, editFragment).addToBackStack(null).commit();
             }
         });
+
+        // 🔹 MANAGE REVENUE (Direct Navigation)
+        View cardManageRevenue = view.findViewById(R.id.cardManageRevenue);
+        if (cardManageRevenue != null) {
+            cardManageRevenue.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(getActivity(), RevenueListActivity.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+            });
+        }
 
         return view;
     }

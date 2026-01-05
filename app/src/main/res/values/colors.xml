@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Palette -->
+    <color name="purple_main">#9B4DCA</color>     <!-- Violet principal -->
+    <color name="purple_dark">#6E2C91</color>     <!-- Violet foncé (accent) -->
+    <color name="black_background">@color/purple_dark</color> <!-- Noir profond (fond) -->
+    <color name="white">#FFFFFF</color>           <!-- Blanc -->
+    <color name="gray_dark_cards">#2C2C2C</color> <!-- Gris foncé (cartes) -->
+    <color name="gray_light_text">#9E9E9E</color> <!-- Gris clair (texte secondaire) -->
+    <color name="black">#000000</color>
+
+    <!-- Missing colors -->
+    <color name="mauve">#9B4DCA</color>
+    <color name="mauve_light">#D1A3E6</color>
+    <color name="white_opacity_70">#B3FFFFFF</color>
 </resources>

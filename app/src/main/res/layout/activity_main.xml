@@ -3,15 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#E3F2FD">
+    android:layout_height="match_parent">
 
     <!-- TOOLBAR EN HAUT -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#1976D2"
+        android:background="@color/purple_main"
         android:title="Pocket Manager"
         android:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +30,9 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="@color/gray_dark_cards"
+        app:itemIconTint="@color/purple_main"
+        app:itemTextColor="@color/white"
         app:menu="@menu/bottom_menu"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"/>
