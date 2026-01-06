@@ -1,0 +1,31 @@
+<resources>
+    <!-- New Palette -->
+    <color name="primary_dark">#3B2C5F</color>     <!-- Violet foncé (Headers, Splash, Bg principal optionnel) -->
+    <color name="primary_violet">#5B3FD6</color>   <!-- Violet principal (Boutons, Actifs) -->
+    <color name="primary_accent">#8B6CFF</color>   <!-- Violet clair / Accent (Highlights) -->
+
+    <color name="color_white">#FFFFFF</color>           <!-- Blanc (Cartes, Content) -->
+    <color name="background_light">#F3F4F8</color> <!-- Gris très clair (Bg général) -->
+    <color name="border_shadow">#E6E7EB</color>    <!-- Gris clair (Borders, Ombres) -->
+
+    <color name="text_main">#2C2C2C</color>        <!-- Texte principal foncé -->
+    <color name="text_secondary">#8A8A9E</color>   <!-- Texte secondaire / désactivé -->
+
+    <color name="rating_star">#FFC83D</color>      <!-- Etoiles -->
+    <color name="cta_button">#6D5DF6</color>       <!-- CTA Button -->
+    <color name="semantic_red">#D32F2F</color>     <!-- Rouge (Erreur, Soustraire) -->
+    <color name="semantic_green">#388E3C</color>   <!-- Vert (Succès, Ajouter) -->
+
+    <!-- Legacy / Compat Mappings (remapped to new palette where sensible) -->
+    <color name="purple_main">@color/primary_violet</color>
+    <color name="purple_dark">@color/primary_dark</color>
+    <color name="black_background">@color/primary_dark</color> <!-- Mapped to dark violet as per "Fond principal" user request, though windowBg might be light -->
+    <color name="gray_dark_cards">@color/color_white</color>   <!-- Cards are now white -->
+    <color name="gray_light_text">@color/text_secondary</color>
+    <color name="white">@color/color_white</color>
+    <color name="black">#000000</color>
+    
+    <color name="mauve">@color/primary_violet</color>
+    <color name="mauve_light">@color/primary_accent</color>
+    <color name="white_opacity_70">#B3FFFFFF</color>
+</resources>

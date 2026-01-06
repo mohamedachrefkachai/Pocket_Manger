@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_background"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/titleManage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gérer Profil"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/subtitleManage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Que souhaitez-vous faire ?"
+        android:textSize="16sp"
+        android:textColor="@color/gray_light_text"
+        app:layout_constraintTop_toBottomOf="@id/titleManage"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Removed Manage Balance and Manage Revenue cards as per request -->
+
+    <!-- Option: Modifier Profil -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/gray_dark_cards"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/subtitleManage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="?attr/selectableItemBackground">
+            
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_edit"
+                app:tint="@color/purple_main"
+                android:layout_marginEnd="16dp"/>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modifier Profil"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Changer nom ou email"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_light_text"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Option: Supprimer Profil -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDelete"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/gray_dark_cards"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/cardUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_delete"
+                app:tint="#D32F2F"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supprimer Compte"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#D32F2F"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Action irréversible"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_light_text"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Formulaire d'édition (Caché par défaut ou dans un bottom sheet ?)
+         Pour l'instant, je fais une structure simple. Le code Java gérera la navigation. -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark">
+
+    <!-- Top Section (Logo) -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/pocketmanger"
+        android:contentDescription="Logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cardContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Créer un compte"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Bottom Card Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_bottom_sheet"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="32dp"
+        app:layout_constraintHeight_percent="0.75"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="32dp">
+
+                <!-- Nom d'utilisateur -->
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input_pill"
+                    android:drawableStart="@android:drawable/ic_menu_myplaces"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@color/primary_violet"
+                    android:hint="Nom d'utilisateur"
+                    android:textColorHint="@color/text_secondary"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/text_main"
+                    android:padding="16dp" />
+
+                <!-- Email -->
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_input_pill"
+                    android:drawableStart="@android:drawable/ic_dialog_email"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@color/primary_violet"
+                    android:hint="Email"
+                    android:textColorHint="@color/text_secondary"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/text_main"
+                    android:padding="16dp" />
+
+                <!-- Mot de passe -->
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_input_pill"
+                    android:drawableStart="@android:drawable/ic_lock_lock"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@color/primary_violet"
+                    android:hint="Mot de passe"
+                    android:textColorHint="@color/text_secondary"
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_main"
+                    android:padding="16dp" />
+
+                <EditText
+                    android:id="@+id/confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_input_pill"
+                    android:drawableStart="@android:drawable/ic_lock_lock"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@color/primary_violet"
+                    android:hint="Confirmer mot de passe"
+                    android:textColorHint="@color/text_secondary"
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_main"
+                    android:padding="16dp" />
+
+                <!-- Gender Radio Group -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Genre"
+                    android:textColor="@color/text_main"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Homme"
+                        android:textColor="@color/text_main"
+                        android:buttonTint="@color/primary_violet"
+                        android:layout_marginEnd="16dp"/>
+
+                    <RadioButton
+                        android:id="@+id/radioFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Femme"
+                        android:textColor="@color/text_main"
+                        android:buttonTint="@color/primary_violet"/>
+                </RadioGroup>
+
+                <!-- Birth Date -->
+                <EditText
+                    android:id="@+id/etBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_input_pill"
+                    android:drawableStart="@android:drawable/ic_menu_my_calendar"
+                    android:drawablePadding="16dp"
+                    android:drawableTint="@color/primary_violet"
+                    android:hint="Date de naissance (YYYY-MM-DD)"
+                    android:textColorHint="@color/text_secondary"
+                    android:inputType="date"
+                    android:textColor="@color/text_main"
+                    android:padding="16dp" />
+
+                <Switch
+                    android:id="@+id/switch_biometric"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Activer l'empreinte"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_main"
+                    android:layout_marginTop="16dp"/>
+
+                <!-- S'inscrire Button -->
+                <Button
+                    android:id="@+id/register_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_cta_button"
+                    android:text="S'INSCRIRE"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"/>
+
+                <!-- Bouton Retour Login -->
+                <Button
+                    android:id="@+id/back_login_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:text="Retour au Login"
+                    android:textColor="@color/primary_accent" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
