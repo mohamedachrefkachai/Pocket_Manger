@@ -48,10 +48,10 @@ public class HomeFragment extends Fragment {
 
     private void loadUserData() {
         new Thread(() -> {
+            if (getContext() == null)
+                return;
             com.example.recyclersleam.Util.MyDataBase db = com.example.recyclersleam.Util.MyDataBase
                     .getAppDataBase(getContext());
-            // If userId is not set, try to get from SharedPreferences or similar (omitted
-            // for brevity, relying on Activity passing it)
             if (userId == 0)
                 return;
 
@@ -75,34 +75,48 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupRevenueChart(List<com.example.recyclersleam.Entity.Revenue> revenueList) {
-        ArrayList<Entry> entries = new ArrayList<>();
-        // Simple index-based x-axis for now. In a real app, you might parse dates.
-        for (int i = 0; i < revenueList.size(); i++) {
-            entries.add(new Entry(i, (float) revenueList.get(i).getAmount()));
+        if (revenueList == null || revenueList.isEmpty()) {
+            revenueChart.clear();
+            return;
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Revenus");
-        dataSet.setColor(Color.parseColor("#388E3C"));
-        dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setLineWidth(2f);
-        dataSet.setCircleColor(Color.parseColor("#388E3C"));
-        dataSet.setCircleRadius(4f);
-        dataSet.setDrawValues(false); // Hide values on points to keep it clean
+        try {
+            ArrayList<Entry> entries = new ArrayList<>();
+            // Simple index-based x-axis for now. In a real app, you might parse dates.
+            for (int i = 0; i < revenueList.size(); i++) {
+                entries.add(new Entry(i, (float) revenueList.get(i).getAmount()));
+            }
 
-        LineData lineData = new LineData(dataSet);
-        revenueChart.setData(lineData);
-        revenueChart.getDescription().setEnabled(false); // Hide description
-        revenueChart.getLegend().setEnabled(false); // Hide legend if preferred, or keep it
+            if (entries.isEmpty()) {
+                revenueChart.clear();
+                return;
+            }
 
-        com.github.mikephil.charting.components.XAxis xAxis = revenueChart.getXAxis();
-        xAxis.setDrawGridLines(false); // Cleaner look
-        xAxis.setGranularity(1f); // Force step to 1
-        xAxis.setGranularityEnabled(true);
-        xAxis.setTextColor(Color.WHITE);
+            LineDataSet dataSet = new LineDataSet(entries, "Revenus");
+            dataSet.setColor(Color.parseColor("#388E3C"));
+            dataSet.setValueTextColor(Color.WHITE);
+            dataSet.setLineWidth(2f);
+            dataSet.setCircleColor(Color.parseColor("#388E3C"));
+            dataSet.setCircleRadius(4f);
+            dataSet.setDrawValues(false); // Hide values on points to keep it clean
 
-        revenueChart.getAxisLeft().setDrawGridLines(false);
-        revenueChart.getAxisLeft().setTextColor(Color.WHITE);
-        revenueChart.getAxisRight().setEnabled(false); // Hide right axis
-        revenueChart.invalidate(); // Refresh
+            LineData lineData = new LineData(dataSet);
+            revenueChart.setData(lineData);
+            revenueChart.getDescription().setEnabled(false); // Hide description
+            revenueChart.getLegend().setEnabled(false); // Hide legend if preferred, or keep it
+
+            com.github.mikephil.charting.components.XAxis xAxis = revenueChart.getXAxis();
+            xAxis.setDrawGridLines(false); // Cleaner look
+            xAxis.setGranularity(1f); // Force step to 1
+            xAxis.setGranularityEnabled(true);
+            xAxis.setTextColor(Color.WHITE);
+
+            revenueChart.getAxisLeft().setDrawGridLines(false);
+            revenueChart.getAxisLeft().setTextColor(Color.WHITE);
+            revenueChart.getAxisRight().setEnabled(false); // Hide right axis
+            revenueChart.invalidate(); // Refresh
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

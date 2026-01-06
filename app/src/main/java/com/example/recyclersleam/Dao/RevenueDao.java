@@ -25,6 +25,6 @@ public interface RevenueDao {
     @Query("SELECT * FROM revenues WHERE userId = :userId")
     List<Revenue> getAllByUser(int userId);
 
-    @Query("SELECT SUM(amount) FROM revenues WHERE userId = :userId")
+    @Query("SELECT COALESCE(SUM(amount), 0) FROM revenues WHERE userId = :userId")
     double getTotalRevenueByUser(int userId);
 }

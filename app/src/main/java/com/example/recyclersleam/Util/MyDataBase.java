@@ -11,7 +11,7 @@ import com.example.recyclersleam.Dao.UserDao;
 import com.example.recyclersleam.Entity.Revenue;
 import com.example.recyclersleam.Entity.User;
 
-@Database(entities = { User.class, Revenue.class }, version = 4, exportSchema = false)
+@Database(entities = { User.class, Revenue.class }, version = 5, exportSchema = false)
 public abstract class MyDataBase extends RoomDatabase {
 
     private static MyDataBase instance;

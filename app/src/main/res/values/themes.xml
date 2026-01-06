@@ -2,21 +2,21 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.RecyclerSleam" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Colors -->
-        <item name="colorPrimary">@color/purple_main</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/purple_dark</item>
-        <item name="colorOnPrimaryContainer">@color/white</item>
+        <item name="colorPrimary">@color/primary_violet</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <item name="colorPrimaryContainer">@color/primary_dark</item>
+        <item name="colorOnPrimaryContainer">@color/color_white</item>
         
-        <item name="colorSecondary">@color/purple_dark</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondary">@color/primary_accent</item>
+        <item name="colorOnSecondary">@color/color_white</item>
 
-        <item name="android:windowBackground">@color/black_background</item>
-        <item name="colorSurface">@color/gray_dark_cards</item>
-        <item name="colorOnSurface">@color/white</item>
-        <item name="colorOnBackground">@color/white</item>
+        <item name="android:windowBackground">@color/background_light</item>
+        <item name="colorSurface">@color/color_white</item>
+        <item name="colorOnSurface">@color/text_main</item>
+        <item name="colorOnBackground">@color/text_main</item>
 
         <!-- Status Bar -->
-        <item name="android:statusBarColor">@color/black_background</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 

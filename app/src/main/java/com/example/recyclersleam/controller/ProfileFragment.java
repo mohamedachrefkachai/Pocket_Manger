@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment {
         // 🔹 VIEWS
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
-        TextView tvBalance = view.findViewById(R.id.tvBalance);
+
         imgProfile = view.findViewById(R.id.imgProfile);
 
         View cardManageProfile = view.findViewById(R.id.cardManageProfile);
@@ -45,17 +45,6 @@ public class ProfileFragment extends Fragment {
         // 🔹 DATA
         tvName.setText(name);
         tvEmail.setText(email);
-
-        // Fetch balance from DB to be sure
-        new Thread(() -> {
-            com.example.recyclersleam.Entity.User user = com.example.recyclersleam.Util.MyDataBase
-                    .getAppDataBase(getContext()).UserDao().findById(userId);
-            if (user != null) {
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> tvBalance.setText("Solde: " + user.getSolde() + " TND"));
-                }
-            }
-        }).start();
 
         // 🔹 MANAGE PROFILE (Navigation to Hub)
         cardManageProfile.setOnClickListener(v -> {

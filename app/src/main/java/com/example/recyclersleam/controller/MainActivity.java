@@ -31,7 +31,13 @@ public class MainActivity extends AppCompatActivity {
         userId = getIntent().getIntExtra("userId", -1);
         // Toolbar
         toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            try {
+                setSupportActionBar(toolbar);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         // Bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_nav);

@@ -51,8 +51,8 @@
             android:hint="Entrez votre solde (TND)"
             android:inputType="numberDecimal"
             android:padding="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/white_opacity_70"
+            android:textColor="@color/text_main"
+            android:textColorHint="@color/text_secondary"
             android:layout_marginBottom="24dp" />
 
         <Button
