@@ -68,8 +68,6 @@ public class Login extends AppCompatActivity {
 
         registerBtn.setOnClickListener(v -> startActivity(new Intent(Login.this, Register.class)));
 
-        registerBtn.setOnClickListener(v -> startActivity(new Intent(Login.this, Register.class)));
-
         setupFingerprint();
         setupShakeDetector();
     }

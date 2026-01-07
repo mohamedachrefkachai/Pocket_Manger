@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private Sensor accelerometer;
     private movement shakeDetector;
     private MyDataBase db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         // Init database for global add
         db = MyDataBase.getAppDataBase(this);
         setupGlobalSensor();
-
         // Fragment par défaut
         HomeFragment homeFragment = new HomeFragment();
         homeFragment.setUserId(userId);
@@ -92,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
                 shoppingFragment.setUserId(userId);
                 fragment = shoppingFragment;
                 toolbar.setTitle("Courses");
-
+            } else if (item.getItemId() == R.id.nav_expenses) {
+                Intent intent = new Intent(MainActivity.this, ExpenseListActivity.class);
+                intent.putExtra("userId", userId);
+                startActivity(intent);
+                return true;
             } else if (item.getItemId() == R.id.nav_logout) {
                 // 🔹 Déconnexion
                 Intent intent = new Intent(MainActivity.this, Login.class);
@@ -191,4 +193,5 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("Annuler", null);
         builder.show();
     }
+
 }

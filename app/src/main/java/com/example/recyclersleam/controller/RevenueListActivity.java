@@ -42,7 +42,6 @@ public class RevenueListActivity extends AppCompatActivity {
     private Revenue lastDeletedRevenue;
     private long lastDeletedTime;
     private static final int UNDO_WINDOW_MS = 3000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +127,6 @@ public class RevenueListActivity extends AppCompatActivity {
             // We could clear undo here if we want to be strict, but keeping it is fine too.
         }
     }
-
     private void loadRevenues() {
         new Thread(() -> {
             revenueList = db.RevenueDao().getAllByUser(userId);

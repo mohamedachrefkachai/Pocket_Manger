@@ -53,10 +53,10 @@ public class HomeFragment extends Fragment {
 
     private final String[] tipsAndChallenges = {
             // Tips
-            "� TIP: Épargnez au moins 20% de vos revenus.",
-            "� TIP: Notez chaque dépense pour identifier les fuites.",
+            " TIP: Épargnez au moins 20% de vos revenus.",
+            " TIP: Notez chaque dépense pour identifier les fuites.",
             "💡 TIP: Attendez 24h avant un achat impulsif.",
-            "� TIP: La règle 50/30/20 est votre meilleure amie.",
+            " TIP: La règle 50/30/20 est votre meilleure amie.",
 
             // Challenges
             "🎯 DÉFI: Dépensez 0 TND aujourd'hui (hors nécessités) !",
@@ -66,7 +66,6 @@ public class HomeFragment extends Fragment {
             "🎯 DÉFI: Mettez 5 TND de côté immédiatement.",
             "🎯 DÉFI: Pas de café/snacks achetés dehors aujourd'hui !"
     };
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -337,4 +336,5 @@ public class HomeFragment extends Fragment {
             }
         }).start();
     }
+
 }

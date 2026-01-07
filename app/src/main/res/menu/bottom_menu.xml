@@ -16,6 +16,11 @@
         android:title="Courses"/>
 
     <item
+        android:id="@+id/nav_expenses"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="Dépenses"/>
+
+    <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/ic_logout"
         android:title="Se Déconnecter"/>
