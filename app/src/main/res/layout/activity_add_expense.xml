@@ -242,6 +242,20 @@
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/tvAddress" />
 
+            <Button
+                android:id="@+id/btnDeleteExpense"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FF0000"
+                android:text="Delete Expense"
+                android:textAllCaps="false"
+                android:textColor="@color/color_white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/btnSaveExpense" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -12,6 +12,7 @@ import com.example.recyclersleam.Dao.LocationDao;
 import com.example.recyclersleam.Location.LocationEntity;
 import com.example.recyclersleam.Entity.Expense;
 import com.example.recyclersleam.R;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -86,15 +87,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     Expense expense = expenses.get(position);
-                    // ViewExpenseActivity not ported yet, functionality disabled for now.
-                    /*
-                     * android.content.Intent intent = new android.content.Intent(v.getContext(),
-                     * com.example.pocketmanager.Expenses.ViewExpenseActivity.class);
-                     * intent.putExtra(com.example.pocketmanager.Expenses.ViewExpenseActivity.
-                     * EXTRA_EXPENSE_ID,
-                     * expense.getId());
-                     * v.getContext().startActivity(intent);
-                     */
+                    Intent intent = new Intent(v.getContext(),
+                            com.example.recyclersleam.controller.AddExpenseActivity.class);
+                    intent.putExtra("expenseId", expense.getId());
+                    intent.putExtra("userId", expense.userId);
+                    v.getContext().startActivity(intent);
                 }
             });
         }
